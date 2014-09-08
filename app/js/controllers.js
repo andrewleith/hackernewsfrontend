@@ -36,7 +36,7 @@
 
     /// Split pages into two panes for flipping
     function createPages(stories) {    
-      CSSPlugin.defaultTransformPerspective = 500;
+      CSSPlugin.defaultTransformPerspective = 2000;
       var generatedHTML = "";
 
       // put 3 stories on each page
