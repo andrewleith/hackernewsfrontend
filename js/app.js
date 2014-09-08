@@ -5,7 +5,7 @@
 angular.module('newsreader', [ 'ngRoute', 'newsreader.services', 'newsreader.controllers']).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/getstories', {templateUrl: 'partials/list.html', controller: 'getStories'});
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/getstories'});
 }]);
 
 
