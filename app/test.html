@@ -1,0 +1,104 @@
+<html><head>
+
+  <meta charset="UTF-8">
+
+  <title>forum (Draggable with 3D rotation) - CodePen</title>
+
+  <style>html, body, .screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+h1 { margin-top: 0;}
+#story1 {
+  background-color: red;
+}
+#story2 {
+  background-color: blue;
+}
+#screen2 { 
+display: none
+}
+#proxytrigger {
+  margin-top: 50px;
+  margin-left:150px;
+  height:400px;
+  width:50%;
+  background:#00F;
+}
+#proxy {
+  display: none;
+}</style>
+
+</head>
+
+<body>
+
+<div id="screen1" class="screen" style="height: 617.5px; cursor: move; -webkit-user-select: none; touch-action: none;">
+  <div id="story1" style="height: 617.5px; transform-origin: 100% 100% 0px; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.00028, 0, 0, 0, 1);">
+    <h1>Headline!
+    <p>This is an exciting story</p>
+  </h1></div>
+  <div id="proxy" style="transform: translate3d(0px, 0px, 0px); z-index: 1000;"></div>
+</div>
+
+<div id="screen2" class="screen">
+  <div id="story2"></div>
+  <div id="proxy"></div>
+</div>
+
+  <script src="http://assets.codepen.io/assets/libs/fullpage/jquery-ab8e840c3dad7ccf2deadb8c40d53bdb.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/utils/Draggable.min.js"></script>
+  <script src="bower_components/greensock/src/minified/plugins/ThrowPropsPlugin.min.js"></script>
+
+  <script>
+    var story1 = $("#story1"),
+    story2 = $("#story2"),
+    proxy = $("#proxy"),
+    s1trigger = $("#screen1"),
+    screenheight = $(window).height();
+
+TweenLite.set([story1, s1trigger],  {height: screenheight / 2});
+TweenLite.set([story1], {transformOrigin: '100% 100% 0'});
+TweenLite.set(story1, {transformPerspective:3500});
+
+Draggable.create(proxy,
+{
+  type:'y',
+  minY: 0,
+  throwProps: true,
+  trigger: s1trigger,
+  onDrag: rotate,
+  onThrowUpdate: rotate, 
+  edgeResistance:1,
+  lockAxis:true,
+  throwResistance:100,
+  dragResistance: 0.75,
+  ease:Power4.easeOut,
+  onDragEnd: function() {
+    
+  },
+  snap: function(endValue) {
+    var velocity = ThrowPropsPlugin.getVelocity(proxy, "y");
+
+    console.log(velocity);
+
+    if (velocity > 10)
+      return 180;
+     else 
+       return 0;
+  }
+});
+
+function rotate() {
+  if (this.y > 0)
+    TweenLite.set(story1, {rotationX:-this.y});
+}
+    //@ sourceURL=pen.js
+  </script>
+
+
+
+</body></html>
