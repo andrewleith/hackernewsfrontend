@@ -36,7 +36,7 @@
 
     /// Split pages into two panes for flipping
     function createPages(stories) {    
-      CSSPlugin.defaultTransformPerspective = 2000;
+      CSSPlugin.defaultTransformPerspective = 5000;
       var generatedHTML = "";
 
       // put 3 stories on each page
@@ -113,7 +113,7 @@
                 text,
                 iframe;
 
-            if (!inStory) {
+            if (!inStory && currentStory != 0) {
               if (this.pointerY >= 0 && this.pointerY < screenHeight/4) {
                 story = $('#top' + currentStory).find('.story:eq(0)');
               }
