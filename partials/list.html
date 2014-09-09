@@ -37,15 +37,22 @@
 		width: 100%;
 		height: 240px;
 	}
+	#flipapp {
+		box-shadow: rgba(0, 0, 0, 0.247059) 0px 25px 30px 0px;
+	}
 	#loading {
 		position: absolute;
-		top: 0;
-		text-align: center;
-		padding-top: 60%;
 		color: #fff;
 		width: 100%;
-		background-color: rgb(242, 117, 43);
+		background-color: rgb(242, 117, 43) ;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		height: 100%;
+		max-width: 600px;
+		margin: auto;
+		text-align: center;
 	}
 	#loading h1 {
 		opacity: 0;
@@ -103,16 +110,22 @@
 
 	.top {
 		-webkit-transform-origin: 100% 100%;
-		top: 0;
+		/*top: 20px;*/
+		/*margin-top: 20px;*/
 	}
 
 	.bottom {
 		-webkit-transform-origin: 0 0;
-		bottom: 0;
+		/*bottom: 20px;*/
+		/*margin-bottom: 20px;*/
 	}
 
 	.page {
 		background-color: #fff;
+		max-width: 600px;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
 	}
 	.story {
 		padding: 0 20px;
