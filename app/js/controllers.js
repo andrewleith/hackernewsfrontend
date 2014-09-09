@@ -32,7 +32,8 @@
 
     
 
-    TweenLite.set(storyPane, { x: screenWidth });// hide images until they are loaded
+    TweenLite.set(storyPane, { x: screenWidth }); 
+    TweenLite.set('#loading i', { lineHeight: screenHeight + 'px'}); // make the loading icon centered
 
     /// Split pages into two panes for flipping
     function createPages(stories) {    
@@ -91,7 +92,7 @@
       generatedHTML += '<div class="bottom page intro' + '" id="bottom0"><div class="overlay"><div class="screen"><div class="headerlogo">HN</div><h1><br /><span class="glyphicon glyphicon-circle-arrow-up"></span><br/><br/><br/>Swipe up to read stories</h1></div></div>';
       app.append(generatedHTML);
       
-      TweenLite.set(pageElements, { opacity: 0 });// hide app til some data is loaded
+      TweenLite.set($(pageElements), { opacity: 0 });// hide app til some data is loaded
 
       // create flipboard
       Draggable.create(proxy, {
@@ -217,7 +218,7 @@
         var storyTop = $('#top' + currentStory),
             storyBottom = $('#bottom' + currentStory);
 
-        TweenLite.set([storyTop.find('.story'), storyBottom.find('.story')], { backgroundColor: 'rgba(0,0,0,0)', boxShadow: 'none'});
+        TweenLite.set([storyTop.find('.story'), storyBottom.find('.story')], { clearProps: 'backgroundColor', boxShadow: 'none'});
         TweenLite.set([storyTop.find('.story-inner'), storyBottom.find('.story-inner')], { scale: 1});
         TweenLite.set([storyTop.find('.loader'), storyBottom.find('.loader')], { x: -1* screenWidth - 20});
 
@@ -237,7 +238,7 @@
       TweenLite.set(proxy, { y: startY}); 
       $('.bottom').scrollTop(screenHeight/2); // align halves 
       TweenLite.set(tops, { rotationX: -180, force3D:true, rotationY: 0 }); // hide all tops but the first one
-      TweenLite.set('.top, .bottom', { height: screenHeight/2 }); // fix their heights to make the flip work
+      TweenLite.set('.page', { height: screenHeight/2}); // fix their heights to make the flip work
       TweenLite.set('.bottom', { top: screenHeight/2 }); // position the bottom explicitly so there is no 1px white line between top and bottom on my iphone (worked fine in chrome)
       TweenLite.set('#bottom0', { boxShadow: '0px 25px 30px 0px rgba(0, 0, 0, 0.25)' }); // TODO: move this to css
       TweenLite.set('.loader', { x: -1*screenWidth - 20});
@@ -311,10 +312,10 @@
       var openingSequence = new TimelineLite({
         align: 'sequence',
         tweens: [
-          new TimelineLite({ tweens: [
-            TweenLite.to('#loading i', 0.50, { autoAlpha: 0 }),
-            TweenLite.to(pageElements, 0.75, { autoAlpha: 1 }), // fade in app
-          ]}),
+          // new TimelineLite({ tweens: [
+            TweenLite.to('#loading', 0.50, { autoAlpha: 0 }),
+            TweenLite.to($(pageElements), 0.75, { autoAlpha: 1 }), // fade in app
+          // ]}),
           TweenLite.to('#bottom0 h1', 0.5, { opacity: 1 }),
           new TimelineLite({ tweens: [
             TweenLite.to('#bottom0', 0.4, {  rotationX: 65 }),
