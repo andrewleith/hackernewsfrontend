@@ -135,10 +135,12 @@
                 tweens: [
                   TweenLite.to(story, 0.25, {backgroundColor: 'rgba(0,0,0,0.15)', boxShadow: 'inset 1px 1px 40px rgba(0,0,0, 0.25)'}),
                   TweenLite.to(text, 0.25, {scale: 0.95}),
-                  TweenLite.to(story.find('.loader'), 2, { x: -20})
+                  //TweenLite.to(story.find('.loader'), 2, { x: -20})
                 ]
               }).play(0);
 
+              window.open(story.data('href'));
+              return;
               storyPane.find('#content').html(iframe);
 
               // storyPane.find('iframe').on('load', function() {
